@@ -5,6 +5,14 @@ install)
     wget https://raw.githubusercontent.com/vitche/shell-storage-timeline-instance-logger/master/storage-timeline-instance-logger.sh -O- > /usr/bin/storage-timeline-instance-logger.sh
     chmod +x /usr/bin/storage-timeline-instance-logger.sh
     exit 0
+    ;;
+install-cron)
+    OLD_CRONTAB="$(crontab -l)"
+    CRON_DEFINITION="*/5 * * * * storage-timeline-instance-logger.sh"
+    NEW_LINE=$'\n'
+    echo "$OLD_CRONTAB$NEW_LINE$CRON_DEFINITION"
+    exit 0
+    ;;
 esac
 
 case $4 in
