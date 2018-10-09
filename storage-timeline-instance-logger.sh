@@ -8,9 +8,14 @@ install)
     ;;
 install-cron)
     OLD_CRONTAB="$(crontab -l)"
-    CRON_DEFINITION="*/5 * * * * storage-timeline-instance-logger.sh"
+    CRON_DEFINITION="*/5 * * * * storage-timeline-instance-logger.sh \"$2\" \"$3\" \"$4\" cpu"
     NEW_LINE=$'\n'
-    echo "$OLD_CRONTAB$NEW_LINE$CRON_DEFINITION"
+    if [[ $OLD_CRONTAB = *"storage-timeline-instance-logger.sh"* ]]; then
+      echo "storage-timeline-instance-logger.sh CRON task already installed"
+    else
+      echo "$OLD_CRONTAB$NEW_LINE$CRON_DEFINITION" | crontab -
+      echo "storage-timeline-instance-logger.sh CRON task installed"
+    fi
     exit 0
     ;;
 esac
