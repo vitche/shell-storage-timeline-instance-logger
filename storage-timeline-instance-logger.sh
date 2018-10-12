@@ -8,7 +8,15 @@ install)
     ;;
 install-cron)
     OLD_CRONTAB="$(crontab -l)"
-    CRON_DEFINITION="*/5 * * * * storage-timeline-instance-logger.sh \"$2\" \"$3\" \"$4\" cpu"
+    schema=$3
+    if [[ -z "$schema" ]]; then
+      schema="instance-logs"
+    fi
+    timeLine=$4
+    if [[ -z "$timeLine" ]]; then
+      timeLine="$(od -x /dev/urandom | head -1 | awk '{OFS=""; print $2$3,$4,$5,$6,$7$8$9}')"
+    fi
+    CRON_DEFINITION="*/5 * * * * storage-timeline-instance-logger.sh \"$2\" \"$schema\" \"$timeLine\" cpu"
     NEW_LINE=$'\n'
     if [[ $OLD_CRONTAB = *"storage-timeline-instance-logger.sh"* ]]; then
       echo "storage-timeline-instance-logger.sh CRON task already installed"

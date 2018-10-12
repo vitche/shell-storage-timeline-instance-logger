@@ -15,6 +15,12 @@ storage-timeline-instance-logger.sh {serverUri} {schema} {timeLine} cpu
 ```
 # Install the CRON task to automatically report CPU usage
 storage-timeline-instance-logger.sh install-cron {serverUri} {schema} {timeLine}
+
+# OR (with auto-generated instance identifier)
+storage-timeline-instance-logger.sh install-cron {serverUri} {schema}
+
+# OR (with auto-generated instance identifier and default schema name)
+storage-timeline-instance-logger.sh install-cron {serverUri}
 ```
 
 # CYGWIN CRON installation
