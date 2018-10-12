@@ -2,6 +2,7 @@
 
 case $1 in
 install)
+    rm /usr/bin/storage-timeline-instance-logger.sh
     wget https://raw.githubusercontent.com/vitche/shell-storage-timeline-instance-logger/master/storage-timeline-instance-logger.sh -O- > /usr/bin/storage-timeline-instance-logger.sh
     chmod +x /usr/bin/storage-timeline-instance-logger.sh
     exit 0
