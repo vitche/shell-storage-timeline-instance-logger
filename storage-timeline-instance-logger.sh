@@ -2,7 +2,9 @@
 
 case $1 in
 install)
-    rm /usr/bin/storage-timeline-instance-logger.sh
+    if [ -f /usr/bin/storage-timeline-instance-logger.sh ]; then
+        rm /usr/bin/storage-timeline-instance-logger.sh
+    fi
     wget https://raw.githubusercontent.com/vitche/shell-storage-timeline-instance-logger/master/storage-timeline-instance-logger.sh -O- > /usr/bin/storage-timeline-instance-logger.sh
     chmod +x /usr/bin/storage-timeline-instance-logger.sh
     exit 0
@@ -38,4 +40,5 @@ install-cron)
         echo "Unable to track from unknown sensor $4"
         ;;
     esac
+    ;;
 esac
